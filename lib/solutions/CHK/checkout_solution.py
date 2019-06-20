@@ -92,7 +92,14 @@ if __name__ == "__main__":
         print("Good values failed : {}.".format(str(res)))
     else:
         print("Good values checked : {}.".format(str(res)))
+    my_string = "AAADDBBBEE";
+    res = checkout(my_string)
+    if res == -1:
+        print("Good values failed : {}.".format(str(res)))
+    else:
+        print("Good values checked : {}.".format(str(res)))
         
+
 
 
 
