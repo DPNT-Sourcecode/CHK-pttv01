@@ -79,11 +79,15 @@ def checkout(skus):
 
 # Testing if we are a single program.
 if __name__ == "__main__":
-    my_string = "ABCDE";
+#    my_string = "ABCDEF";
+#    res = checkout(my_string)
+#    print("Test for {} :: {}".format(my_string, str(res)))
+
+    my_string = "AAAAAAAA";
     res = checkout(my_string)
     print("Test for {} :: {}".format(my_string, str(res)))
 
-    my_string = "AAAAAAAA";
+    my_string = "ABCDEABCDE";
     res = checkout(my_string)
     print("Test for {} :: {}".format(my_string, str(res)))
 
@@ -103,6 +107,7 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
 
 
