@@ -65,13 +65,16 @@ def process_any(basket):
     sorted_elems = sorted(sorted_dict_of_items, reverse=True)
     idx_price = 0
     idx_item = 0
-    for idx in range(num_of_items):
+    counter = 0
+    while counter < num_of_items:
        if basket[sorted_dict_of_items[sorted_elems[idx_price]][idx_item]] == 0:
            idx_item += 1
            if idx_item >= len(sorted_dict_of_items[sorted_elems[idx_price]]):
                idx_price += 1
                idx_item = 0
-       basket[sorted_dict_of_items[sorted_elems[idx_price]][idx_item]] -= 1
+       else:
+           basket[sorted_dict_of_items[sorted_elems[idx_price]][idx_item]] -= 1
+           counter += 1
         
     return num_of_groups * any_of_them['value']
 
@@ -192,4 +195,5 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
