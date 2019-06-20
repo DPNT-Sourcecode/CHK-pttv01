@@ -59,7 +59,7 @@ def process_any(basket):
     
     # Now we remove the items fromthe basket based on the price of one item.
     # Removing, first, the ones with the highest price.
-    sorted_elems = sorted(sorted_dict_of_items, reverse=False)
+    sorted_elems = sorted(sorted_dict_of_items, reverse=True)
 
     print(sorted_elems)
         
@@ -140,21 +140,21 @@ def checkout(skus):
 
 # Testing if we are a single program.
 if __name__ == "__main__":
-    my_string = "ABCDEF";
+    my_string = "ZZYXTT";
     res = checkout(my_string)
     print("Test for {} :: {}".format(my_string, str(res)))
 
-    my_string = "FFFFFF";
-    res = checkout(my_string)
-    print("Test for {} :: {}".format(my_string, str(res)))
+#    my_string = "FFFFFF";
+#    res = checkout(my_string)
+#    print("Test for {} :: {}".format(my_string, str(res)))
 
-    my_string = "FFFF";
-    res = checkout(my_string)
-    print("Test for {} :: {}".format(my_string, str(res)))
+#    my_string = "FFFF";
+#    res = checkout(my_string)
+#    print("Test for {} :: {}".format(my_string, str(res)))
 
-    my_string = "FF";
-    res = checkout(my_string)
-    print("Test for {} :: {}".format(my_string, str(res)))
+#    my_string = "FF";
+#    res = checkout(my_string)
+#    print("Test for {} :: {}".format(my_string, str(res)))
 
 #    my_string = "AAAAAAAA";
 #    res = checkout(my_string)
@@ -184,6 +184,7 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
 
 
