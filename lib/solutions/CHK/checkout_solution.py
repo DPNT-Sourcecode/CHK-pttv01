@@ -59,9 +59,9 @@ def process_any(basket):
     
     # Now we remove the items fromthe basket based on the price of one item.
     # Removing, first, the ones with the highest price.
-    sorted(sorted_dict_of_items, reverse=True)
+    sorted_elems = sorted(sorted_dict_of_items, reverse=False)
 
-    print(sorted_dict_of_items)
+    print(sorted_elems)
         
     return num_of_groups * any_of_them['value']
 
@@ -184,5 +184,6 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
 
