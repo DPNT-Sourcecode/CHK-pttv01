@@ -85,7 +85,15 @@ if __name__ == "__main__":
     res = checkout(my_string)
     print("Test for {} :: {}".format(my_string, str(res)))
 
+    my_string = "FFFFFF";
+    res = checkout(my_string)
+    print("Test for {} :: {}".format(my_string, str(res)))
+
     my_string = "FFFF";
+    res = checkout(my_string)
+    print("Test for {} :: {}".format(my_string, str(res)))
+
+    my_string = "FF";
     res = checkout(my_string)
     print("Test for {} :: {}".format(my_string, str(res)))
 
@@ -117,3 +125,4 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
