@@ -1,6 +1,36 @@
 #!/usr/local/bin/python3
 import itertools
 
+# The inventory and the prices.
+inventory = { 
+    'A' : { "single": 50, "multiple": (3, 130) }, 
+    'B' : { "single": 30, "multiple": (2, 45) }, 
+    'C' : { "single": 20 }, 
+    'D' : { "single": 15 }, 
+    'E' : { "single": 40, "free": {2, 'B', 1} } 
+}
+
+# Function calculating the cost for one letter 
+# and a number of items.
+def calc_cost(key, num_items):
+    '''
+    Function calculating the cost for one letter 
+    and a number of items.
+    Args:
+        key: Letter corresponding to an item.
+        num_items: Number of items.
+    Return:
+        Integer : Cost for that product.
+    '''
+    cost = 0
+    if 'multiple' in inventory[key]:
+        remain = num_items % inventory[key]['multiple'][0]
+        cost += remain * inventory[key]['single'] 
+        cost += ((num_items - remain) / inventory[key]['multiple'][0]) * inventory[key]['multiple'][1]  
+    else:
+        cost += num_items * inventory[key]['single'] 
+    return cost
+   
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
@@ -11,16 +41,6 @@ def checkout(skus):
     Return:
        Integer : Total checkout value of the items or -1.
     '''
-    # Let's split the string so we can have each on of the item in the basket. 
-    # Each of the item should be a single letter. If not return -1.
-    # The inventory and the prices.
-    inventory = { 
-        'A' : { "single": 50, "multiple": (3, 130) }, 
-        'B' : { "single": 30, "multiple": (2, 45) }, 
-        'C' : { "single": 20 }, 
-        'D' : { "single": 15 }, 
-        'E' : { "single": 40, "free": {2, 'B', 1} } 
-    }
     # Our basket.
     basket = { 'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0 }
     # We parse the string to be sure every SKU is an existing letter.
@@ -33,16 +53,13 @@ def checkout(skus):
     for key, value in basket.items():
         # If there is a mulitple inside the inventory for the corresponding 
         # letter (i.e. key) we have to separate the different way of calculating.
-        if 'multiple' in inventory[key]:
-            remain = value % inventory[key]['multiple'][0]
-            cost += remain * inventory[key]['single'] 
-            cost += ((value - remain) / inventory[key]['multiple'][0]) * inventory[key]['multiple'][1]  
-        else:
-            cost += value * inventory[key]['single'] 
+        cost += calc_cost(key, value)
+
         # Here we process the free items.
-        if 'free' in inventory[key]:
-            num_free = (value // inventory[key]['free'][0]) * inventory[key]['free'][2]
-            if inventory[key]['free'][2] 
+#        if 'free' in inventory[key]:
+#            num_free = (value // inventory[key]['free'][0]) * inventory[key]['free'][2]
+#            if basket[inventory[key]['free'][1]] >= num_free:
+#                cost -= num_free * inventory[key] 
 
     return cost;
 
@@ -67,4 +84,5 @@ if __name__ == "__main__":
     else:
         print("Good values checked : {}.".format(str(res)))
         
+
 
