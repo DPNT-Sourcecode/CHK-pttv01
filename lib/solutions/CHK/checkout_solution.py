@@ -18,13 +18,13 @@ def checkout(skus):
         'A' : { "single": 50, "multiple": (3, 130) }, 
         'B' : { "single": 30, "multiple": (2, 45) }, 
         'C' : { "single": 20 }, 
-        'D' : { "single": 15 } 
+        'D' : { "single": 15 }, 
+        'E' : { "single": 40, "free": {2, 'B', 1} } 
     }
     # Our basket.
-    basket = { 'A': 0, 'B': 0, 'C': 0, 'D': 0 }
+    basket = { 'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0 }
     # We parse the string to be sure every SKU is an existing letter.
     for one_sku in skus:
-        print("==> {}.".format(one_sku))
         if one_sku not in basket:
             return -1
         basket[one_sku] += 1
@@ -39,6 +39,10 @@ def checkout(skus):
             cost += ((value - remain) / inventory[key]['multiple'][0]) * inventory[key]['multiple'][1]  
         else:
             cost += value * inventory[key]['single'] 
+        # Here we process the free items.
+        if 'free' in inventory[key]:
+            num_free = (value // inventory[key]['free'][0]) * inventory[key]['free'][2]
+            if inventory[key]['free'][2] 
 
     return cost;
 
@@ -63,3 +67,4 @@ if __name__ == "__main__":
     else:
         print("Good values checked : {}.".format(str(res)))
         
+
