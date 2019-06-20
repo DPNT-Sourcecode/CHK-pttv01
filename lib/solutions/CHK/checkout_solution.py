@@ -3,8 +3,8 @@ import itertools
 
 # The inventory and the prices.
 inventory = { 
-    'A' : { "single": 50, "multiple": (3, 130) }, 
-    'B' : { "single": 30, "multiple": (2, 45) }, 
+    'A' : { "single": 50, "multiple": [(3, 130), (5, 200)] }, 
+    'B' : { "single": 30, "multiple": [(2, 45)] }, 
     'C' : { "single": 20 }, 
     'D' : { "single": 15 }, 
     'E' : { "single": 40, "free": (2, 'B', 1) } 
@@ -24,9 +24,9 @@ def calc_cost(key, num_items):
     '''
     cost = 0
     if 'multiple' in inventory[key]:
-        remain = num_items % inventory[key]['multiple'][0]
+        remain = num_items % inventory[key]['multiple'][0][0]]
         cost += remain * inventory[key]['single'] 
-        cost += ((num_items - remain) / inventory[key]['multiple'][0]) * inventory[key]['multiple'][1]  
+        cost += ((num_items - remain) / inventory[key]['multiple'][0][0]) * inventory[key]['multiple'][0][1]  
     else:
         cost += num_items * inventory[key]['single'] 
     return cost
@@ -100,4 +100,11 @@ if __name__ == "__main__":
         print("Good values failed : {}.".format(str(res)))
     else:
         print("Good values checked : {}.".format(str(res)))
+    my_string = "AAADDBBBEEEE";
+    res = checkout(my_string)
+    if res == -1:
+        print("Good values failed : {}.".format(str(res)))
+    else:
+        print("Good values checked : {}.".format(str(res)))
         
+
