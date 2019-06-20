@@ -62,7 +62,11 @@ def checkout(skus):
 
         # Here we process the free items.
         if 'free' in inventory[key]:
-            num_free = (value // inventory[key]['free'][0]) * inventory[key]['free'][2]
+            num_free = 0
+            if key == inventory[key]['free'][1]:
+                num_free = (value // (inventory[key]['free'][0] + inventory[key]['free'][2])) * inventory[key]['free'][2]
+            else:
+                num_free = (value // inventory[key]['free'][0]) * inventory[key]['free'][2]
             print("{} has free {}".format(key, str(num_free)))
             if num_free and basket[inventory[key]['free'][1]] >= num_free:
                 tmp = calc_cost(inventory[key]['free'][1], basket[inventory[key]['free'][1]])  
@@ -113,7 +117,3 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
-
-
-
-
