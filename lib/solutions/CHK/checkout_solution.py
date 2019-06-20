@@ -25,7 +25,7 @@ def checkout(skus):
     # We parse the string to be sure every SKU is an existing letter.
     for one_sku in skus:
         print("==> {}.".format(one_sku))
-        if one_sku in basket:
+        if one_sku not in basket:
             return -1
         basket[one_sku] += 1
     # Now we do the calculation.
@@ -33,12 +33,12 @@ def checkout(skus):
     for key, value in basket.items():
         # If there is a mulitple inside the inventory for the corresponding 
         # letter (i.e. key) we have to separate the different way of calculating.
-        if inventory[key]['multiple']:
+        if 'multiple' in inventory[key]:
             remain = value % inventory[key]['multiple'][0]
-            cost += remain * inventory['key']['single'] 
+            cost += remain * inventory[key]['single'] 
             cost += ((value - remain) / inventory[key]['multiple'][0]) * inventory[key]['multiple'][1]  
         else:
-            cost += value * inventory['key']['single'] 
+            cost += value * inventory[key]['single'] 
 
     return cost;
 
@@ -56,6 +56,13 @@ if __name__ == "__main__":
         print("Good values failed : {}.".format(str(res)))
     else:
         print("Good values checked : {}.".format(str(res)))
+    my_string = "AAADDBB";
+    res = checkout(my_string)
+    if res == -1:
+        print("Good values failed : {}.".format(str(res)))
+    else:
+        print("Good values checked : {}.".format(str(res)))
         
+
 
 
