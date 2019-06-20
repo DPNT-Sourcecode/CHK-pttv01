@@ -48,8 +48,13 @@ def process_any(basket):
     sorted_dict_of_items = {}
     num_of_items = 0;
     for any_item in any_of_them['items']:
-        sorted_dict_of_items[inventory[any_item]['single']] = any_item;
-        num_of_items += basket[any_item];
+        if inventory[any_item]['single'] in sorted_dict_of_items:
+            sorted_dict_of_items[inventory[any_item]['single']].append(any_item)
+        else:
+            lst_of_items = []
+            lst_of_items.append(any_item)
+            sorted_dict_of_items[inventory[any_item]['single']] = lst_of_items
+        num_of_items += basket[any_item]
     num_of_groups = num_of_items % any_of_them['number']
     
     # Now we remove the items fromthe basket based on the price of one item.
@@ -179,4 +184,5 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
