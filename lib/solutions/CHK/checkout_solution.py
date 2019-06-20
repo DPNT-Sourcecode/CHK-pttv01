@@ -13,7 +13,7 @@ inventory = {
     'H' : { "single": 10, "multiple": [(10, 80), (5, 45)] }, 
     'I' : { "single": 35 }, 
     'J' : { "single": 60 }, 
-    'K' : { "single": 80, "multiple": [(2, 150)] }, 
+    'K' : { "single": 70, "multiple": [(2, 120)] }, 
     'L' : { "single": 90 }, 
     'M' : { "single": 15 }, 
     'N' : { "single": 40, "free": (3, 'M', 1) }, 
@@ -21,15 +21,44 @@ inventory = {
     'P' : { "single": 50, "multiple": [(5, 200)] }, 
     'Q' : { "single": 30, "multiple": [(3, 80)] }, 
     'R' : { "single": 50, "free": (3, 'Q', 1) }, 
-    'S' : { "single": 30 }, 
+    'S' : { "single": 20 }, 
     'T' : { "single": 20 }, 
     'U' : { "single": 40, "free": (3, 'U', 1) }, 
     'V' : { "single": 50, "multiple": [(3, 130), (2, 90)] }, 
     'W' : { "single": 20 }, 
-    'X' : { "single": 90 }, 
-    'Y' : { "single": 10 }, 
-    'Z' : { "single": 50 } 
+    'X' : { "single": 17 }, 
+    'Y' : { "single": 20 }, 
+    'Z' : { "single": 21 } 
 }
+
+any_of_them = { 'number' : 3, 'items': ['S', 'T', 'X', 'Y', 'Z'], 'value': 45 }
+
+# Function processing the anys.
+def process_any(basket):
+    '''
+    Function rocessing the anys.
+    Arg:
+        basket : Basket of products.
+    Return:
+        Cost to add the products.
+    ''' 
+    cost = 0
+    
+    # First we calculate the number of groups of 3 items we have.
+    sorted_dict_of_items = {}
+    num_of_items = 0;
+    for any_item in any_of_them['items']:
+        sorted_dict_of_items[inventory[any_item]['single']] = any_item;
+        num_of_items += basket[any_item];
+    num_of_groups = num_of_items % any_of_them['number']
+    
+    # Now we remove the items fromthe basket based on the price of one item.
+    # Removing, first, the ones with the highest price.
+    sorted(sorted_dict_of_items, reverse=True)
+
+    print(sorted_dict_of_items)
+        
+    return num_of_groups * any_of_them['value']
 
 # Function calculating the cost for one letter 
 # and a number of items.
@@ -77,7 +106,8 @@ def checkout(skus):
             return -1
         basket[one_sku] += 1
     # Now we do the calculation.
-    cost = 0;
+    cost = process_any(basket);
+    
     for key, value in basket.items():
         # If there is a mulitple inside the inventory for the corresponding 
         # letter (i.e. key) we have to separate the different way of calculating.
@@ -149,3 +179,4 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
