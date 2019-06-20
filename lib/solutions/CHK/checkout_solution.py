@@ -3,7 +3,7 @@ import itertools
 
 # The inventory and the prices.
 inventory = { 
-    'A' : { "single": 50, "multiple": [(3, 130), (5, 200)] }, 
+    'A' : { "single": 50, "multiple": [(5, 200), (3, 130)] }, 
     'B' : { "single": 30, "multiple": [(2, 45)] }, 
     'C' : { "single": 20 }, 
     'D' : { "single": 15 }, 
@@ -107,4 +107,5 @@ if __name__ == "__main__":
     else:
         print("Good values checked : {}.".format(str(res)))
         
+
 
