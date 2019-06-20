@@ -11,9 +11,10 @@ def hello(friend_name):
     Return:
         String saying : Hello friend_name.
     '''
-    return "Hello " + frien_name;
+    return "Hello " + friend_name;
 
 if __name__ == '__main__':
     print("{}".format(hello("Bruno")))
     print("{}".format(hello("")))
+
 
