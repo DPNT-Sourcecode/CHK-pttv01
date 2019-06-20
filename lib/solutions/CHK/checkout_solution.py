@@ -66,9 +66,7 @@ def process_any(basket):
     idx_price = 0
     idx_item = 0
     for idx in range(num_of_items):
-       print("Idx = {}".format(idx))
-       print(sorted_dict_of_items[sorted_elems[idx_price]][idx_item])
-       if basket[sorted_dict_of_items[sorted_elems[idx_price]][idx_item]]:
+       if basket[sorted_dict_of_items[sorted_elems[idx_price]][idx_item]] > 0:
            basket[sorted_dict_of_items[sorted_elems[idx_price]][idx_item]] -= 1
        else:
            idx_item += 1
@@ -126,12 +124,11 @@ def checkout(skus):
     print(basket)
     # Now we do the calculation.
     cost = process_any(basket);
-    print("===> {}".format(str(cost)))
+    print(basket)
     for key, value in basket.items():
         # If there is a mulitple inside the inventory for the corresponding 
         # letter (i.e. key) we have to separate the different way of calculating.
         cost += calc_cost(key, value)
-        print("Adding for {} :: {} ==> {}".format(key, str(calc_cost(key, value)), str(cost)))
 
         # Here we process the free items.
         if 'free' in inventory[key]:
@@ -140,10 +137,8 @@ def checkout(skus):
                 num_free = (value // (inventory[key]['free'][0] + inventory[key]['free'][2])) * inventory[key]['free'][2]
             else:
                 num_free = (value // inventory[key]['free'][0]) * inventory[key]['free'][2]
-            print("{} has free {}".format(key, str(num_free)))
             if num_free and basket[inventory[key]['free'][1]] >= num_free:
                 tmp = calc_cost(inventory[key]['free'][1], basket[inventory[key]['free'][1]])  
-                print("Removing from cost : {}".format(str(tmp)))
                 cost -= calc_cost(inventory[key]['free'][1], basket[inventory[key]['free'][1]])  
                 basket[inventory[key]['free'][1]] -= num_free
                 cost += calc_cost(inventory[key]['free'][1], basket[inventory[key]['free'][1]])  
@@ -198,10 +193,3 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
-
-
-
-
-
-
-
