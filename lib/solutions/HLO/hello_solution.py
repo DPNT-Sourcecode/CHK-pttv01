@@ -16,7 +16,3 @@ def hello(friend_name):
 if __name__ == '__main__':
     print("{}".format(hello("Bruno")))
     print("{}".format(hello("")))
-
-
-
-
