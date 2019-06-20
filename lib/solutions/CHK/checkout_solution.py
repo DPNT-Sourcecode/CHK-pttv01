@@ -23,12 +23,21 @@ def calc_cost(key, num_items):
         Integer : Cost for that product.
     '''
     cost = 0
+    tmp_num_items = num_items
+    print("{} : {}".format(key, str(num_items)))
     if 'multiple' in inventory[key]:
-        remain = num_items % inventory[key]['multiple'][0][0]]
-        cost += remain * inventory[key]['single'] 
-        cost += ((num_items - remain) / inventory[key]['multiple'][0][0]) * inventory[key]['multiple'][0][1]  
-    else:
-        cost += num_items * inventory[key]['single'] 
+        for rebate in inventory[key]['multiple']:
+            print(rebate)
+            num_rebates = tmp_num_items // rebate[0]
+            print("Numbates : {}".format(str(num_rebates)))
+            if num_rebates:
+                tmp_num_items -= num_rebates * rebate[0] 
+                cost += num_rebates * rebate[1] 
+            #tmp_num_items = num_items % inventory[key]['multiple'][0][0]]
+            #cost += remain * inventory[key]['single'] 
+            #cost += ((num_items - remain) / inventory[key]['multiple'][0][0]) * inventory[key]['multiple'][0][1]  
+
+    cost += tmp_num_items * inventory[key]['single'] 
     return cost
    
 # noinspection PyUnusedLocal
@@ -72,40 +81,28 @@ def checkout(skus):
 if __name__ == "__main__":
     my_string = "ABCDE";
     res = checkout(my_string)
-    if res == -1:
-        print("Bad values checked.")
-    else:
-        print("Bad values failed.")
+    print("Test for {} :: {}".format(my_string, str(res)))
+
     my_string = "AAA";
     res = checkout(my_string)
-    if res == -1:
-        print("Good values failed : {}.".format(str(res)))
-    else:
-        print("Good values checked : {}.".format(str(res)))
-    my_string = "AAADDBB";
-    res = checkout(my_string)
-    if res == -1:
-        print("Good values failed : {}.".format(str(res)))
-    else:
-        print("Good values checked : {}.".format(str(res)))
-    my_string = "AAADDBBE";
-    res = checkout(my_string)
-    if res == -1:
-        print("Good values failed : {}.".format(str(res)))
-    else:
-        print("Good values checked : {}.".format(str(res)))
-    my_string = "AAADDBBBEE";
-    res = checkout(my_string)
-    if res == -1:
-        print("Good values failed : {}.".format(str(res)))
-    else:
-        print("Good values checked : {}.".format(str(res)))
-    my_string = "AAADDBBBEEEE";
-    res = checkout(my_string)
-    if res == -1:
-        print("Good values failed : {}.".format(str(res)))
-    else:
-        print("Good values checked : {}.".format(str(res)))
+    print("Test for {} :: {}".format(my_string, str(res)))
+
+#    my_string = "AAADDBB";
+#    res = checkout(my_string)
+#    print("Test for {} :: {}".format(my_string, str(res)))
+
+#    my_string = "AAADDBBE";
+#    res = checkout(my_string)
+#    print("Test for {} :: {}".format(my_string, str(res)))
+
+#    my_string = "AAADDBBBEE";
+#    res = checkout(my_string)
+#    print("Test for {} :: {}".format(my_string, str(res)))
+
+#    my_string = "AAADDBBBEEEE";
+#    res = checkout(my_string)
+#    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
 
