@@ -64,13 +64,13 @@ def checkout(skus):
         if 'free' in inventory[key]:
             num_free = (value // inventory[key]['free'][0]) * inventory[key]['free'][2]
             print("{} has free {}".format(key, str(num_free)))
-            if basket[inventory[key]['free'][1]] >= num_free:
+            if num_free and basket[inventory[key]['free'][1]] >= num_free:
                 tmp = calc_cost(inventory[key]['free'][1], basket[inventory[key]['free'][1]])  
                 print("Removing from cost : {}".format(str(tmp)))
                 cost -= calc_cost(inventory[key]['free'][1], basket[inventory[key]['free'][1]])  
                 basket[inventory[key]['free'][1]] -= num_free
                 cost += calc_cost(inventory[key]['free'][1], basket[inventory[key]['free'][1]])  
-            else:
+            elif num_free:
                 cost -= calc_cost(inventory[key]['free'][1], basket[inventory[key]['free'][1]])  
 
     return cost;
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     res = checkout(my_string)
     print("Test for {} :: {}".format(my_string, str(res)))
 
-    my_string = "FF";
+    my_string = "FFFF";
     res = checkout(my_string)
     print("Test for {} :: {}".format(my_string, str(res)))
 
@@ -113,6 +113,7 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
 
 
