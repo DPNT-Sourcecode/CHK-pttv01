@@ -21,10 +21,11 @@ def checkout(skus):
         'D' : { "single": 15 } 
     }
     # Our basket.
-    basket = { 'A': 0, 'B': 0, 'C': 0 , 'D': 0 }
+    basket = { 'A': 0, 'B': 0, 'C': 0, 'D': 0 }
     # We parse the string to be sure every SKU is an existing letter.
     for one_sku in skus:
-        if not basket[one_sku]:
+        print("==> {}.".format(one_sku))
+        if one_sku in basket:
             return -1
         basket[one_sku] += 1
     # Now we do the calculation.
@@ -44,14 +45,17 @@ def checkout(skus):
 # Testing if we are a single program.
 if __name__ == "__main__":
     my_string = "ABCDE";
-    if checkout(my_string) == -1:
+    res = checkout(my_string)
+    if res == -1:
         print("Bad values checked.")
     else:
         print("Bad values failed.")
     my_string = "AAA";
-    if checkout(my_string) == -1:
-        print("Good values failed.")
+    res = checkout(my_string)
+    if res == -1:
+        print("Good values failed : {}.".format(str(res)))
     else:
-        print("Good values checked.")
+        print("Good values checked : {}.".format(str(res)))
         
+
 
