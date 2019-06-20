@@ -56,12 +56,22 @@ def process_any(basket):
             sorted_dict_of_items[inventory[any_item]['single']] = lst_of_items
         num_of_items += basket[any_item]
     num_of_groups = num_of_items % any_of_them['number']
+    if not num_of_groups:
+        return 0;
     
     # Now we remove the items fromthe basket based on the price of one item.
     # Removing, first, the ones with the highest price.
     sorted_elems = sorted(sorted_dict_of_items, reverse=True)
-
-    print(sorted_elems)
+    idx_price = 0
+    idx_item = 0
+    for idx in range(num_of_items):
+       if basket[sorted_dict_of_items[idx_price][idx_item]]:
+           basket[sorted_dict_of_items[idx_price][idx_item]] -= 1
+       else:
+           idx_item += 1
+           if idx_item >= len(sorted_dict_of_items[idx_price]):
+               idx_price += 1
+               idx_item = 0
         
     return num_of_groups * any_of_them['value']
 
@@ -110,9 +120,10 @@ def checkout(skus):
         if one_sku not in basket:
             return -1
         basket[one_sku] += 1
+    print(basket)
     # Now we do the calculation.
     cost = process_any(basket);
-    
+    print("===> {}".format(str(cost)))
     for key, value in basket.items():
         # If there is a mulitple inside the inventory for the corresponding 
         # letter (i.e. key) we have to separate the different way of calculating.
@@ -184,6 +195,7 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
 
 
