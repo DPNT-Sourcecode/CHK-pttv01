@@ -24,18 +24,12 @@ def calc_cost(key, num_items):
     '''
     cost = 0
     tmp_num_items = num_items
-#    print("{} : {}".format(key, str(num_items)))
     if 'multiple' in inventory[key]:
         for rebate in inventory[key]['multiple']:
-#            print(rebate)
             num_rebates = tmp_num_items // rebate[0]
-#            print("Numbates : {}".format(str(num_rebates)))
             if num_rebates:
                 tmp_num_items -= num_rebates * rebate[0] 
                 cost += num_rebates * rebate[1] 
-            #tmp_num_items = num_items % inventory[key]['multiple'][0][0]]
-            #cost += remain * inventory[key]['single'] 
-            #cost += ((num_items - remain) / inventory[key]['multiple'][0][0]) * inventory[key]['multiple'][0][1]  
 
     cost += tmp_num_items * inventory[key]['single'] 
     return cost
@@ -62,9 +56,8 @@ def checkout(skus):
     for key, value in basket.items():
         # If there is a mulitple inside the inventory for the corresponding 
         # letter (i.e. key) we have to separate the different way of calculating.
-        print("Adding for {} :: {}".format(key, str(calc_cost(key, value))))
-        
         cost += calc_cost(key, value)
+        print("Adding for {} :: {} ==> {}".format(key, str(calc_cost(key, value)), str(cost)))
 
         # Here we process the free items.
         if 'free' in inventory[key]:
@@ -75,23 +68,29 @@ def checkout(skus):
                 print("Removing from cost : {}".format(str(tmp)))
                 cost -= calc_cost(inventory[key]['free'][1], basket[inventory[key]['free'][1]])  
                 basket[inventory[key]['free'][1]] -= num_free
-            cost -= calc_cost(inventory[key]['free'][1], basket[inventory[key]['free'][1]])  
+                cost += calc_cost(inventory[key]['free'][1], basket[inventory[key]['free'][1]])  
+            else:
+                cost -= calc_cost(inventory[key]['free'][1], basket[inventory[key]['free'][1]])  
 
     return cost;
 
 # Testing if we are a single program.
 if __name__ == "__main__":
-#    my_string = "ABCDEF";
-#    res = checkout(my_string)
-#    print("Test for {} :: {}".format(my_string, str(res)))
-
-#    my_string = "AAAAAAAA";
-#    res = checkout(my_string)
-#    print("Test for {} :: {}".format(my_string, str(res)))
-
-    my_string = "ABCDEABCDE";
+    my_string = "ABCDEF";
     res = checkout(my_string)
     print("Test for {} :: {}".format(my_string, str(res)))
+
+    my_string = "AAAAAAAA";
+    res = checkout(my_string)
+    print("Test for {} :: {}".format(my_string, str(res)))
+
+#    my_string = "ABCDEABCDE";
+#    res = checkout(my_string)
+#    print("Test for {} :: {}".format(my_string, str(res)))
+
+#    my_string = "CCADDEEBBA";
+#    res = checkout(my_string)
+#    print("Test for {} :: {}".format(my_string, str(res)))
 
 #    my_string = "AAADDBB";
 #    res = checkout(my_string)
@@ -109,4 +108,5 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
