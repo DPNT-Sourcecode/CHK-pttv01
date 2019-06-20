@@ -7,7 +7,8 @@ inventory = {
     'B' : { "single": 30, "multiple": [(2, 45)] }, 
     'C' : { "single": 20 }, 
     'D' : { "single": 15 }, 
-    'E' : { "single": 40, "free": (2, 'B', 1) } 
+    'E' : { "single": 40, "free": (2, 'B', 1) },
+    'F' : { "single": 10, "free": (2, 'F', 1) } 
 }
 
 # Function calculating the cost for one letter 
@@ -45,7 +46,7 @@ def checkout(skus):
        Integer : Total checkout value of the items or -1.
     '''
     # Our basket.
-    basket = { 'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0 }
+    basket = { 'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0, 'F' : 0 }
     # We parse the string to be sure every SKU is an existing letter.
     for one_sku in skus:
         if one_sku not in basket:
@@ -80,9 +81,13 @@ if __name__ == "__main__":
     res = checkout(my_string)
     print("Test for {} :: {}".format(my_string, str(res)))
 
-    my_string = "AAAAAAAA";
+    my_string = "FF";
     res = checkout(my_string)
     print("Test for {} :: {}".format(my_string, str(res)))
+
+#    my_string = "AAAAAAAA";
+#    res = checkout(my_string)
+#    print("Test for {} :: {}".format(my_string, str(res)))
 
 #    my_string = "ABCDEABCDE";
 #    res = checkout(my_string)
@@ -108,5 +113,6 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
 
