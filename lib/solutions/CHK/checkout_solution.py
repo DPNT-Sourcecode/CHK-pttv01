@@ -73,6 +73,7 @@ def process_any(basket):
                idx_price += 1
                idx_item = 0
        else:
+           print("Removing : {}".format(counter))
            basket[sorted_dict_of_items[sorted_elems[idx_price]][idx_item]] -= 1
            counter += 1
         
@@ -151,7 +152,7 @@ def checkout(skus):
 
 # Testing if we are a single program.
 if __name__ == "__main__":
-    my_string = "ZZYXTT";
+    my_string = "SSSZ";
     res = checkout(my_string)
     print("Test for {} :: {}".format(my_string, str(res)))
 
@@ -195,5 +196,6 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
 
