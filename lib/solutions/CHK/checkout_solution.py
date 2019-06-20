@@ -24,12 +24,12 @@ def calc_cost(key, num_items):
     '''
     cost = 0
     tmp_num_items = num_items
-    print("{} : {}".format(key, str(num_items)))
+#    print("{} : {}".format(key, str(num_items)))
     if 'multiple' in inventory[key]:
         for rebate in inventory[key]['multiple']:
-            print(rebate)
+#            print(rebate)
             num_rebates = tmp_num_items // rebate[0]
-            print("Numbates : {}".format(str(num_rebates)))
+#            print("Numbates : {}".format(str(num_rebates)))
             if num_rebates:
                 tmp_num_items -= num_rebates * rebate[0] 
                 cost += num_rebates * rebate[1] 
@@ -62,6 +62,8 @@ def checkout(skus):
     for key, value in basket.items():
         # If there is a mulitple inside the inventory for the corresponding 
         # letter (i.e. key) we have to separate the different way of calculating.
+        print("Adding for {} :: {}".format(key, str(calc_cost(key, value))))
+        
         cost += calc_cost(key, value)
 
         # Here we process the free items.
@@ -107,3 +109,4 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
