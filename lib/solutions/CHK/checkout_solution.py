@@ -8,7 +8,27 @@ inventory = {
     'C' : { "single": 20 }, 
     'D' : { "single": 15 }, 
     'E' : { "single": 40, "free": (2, 'B', 1) },
-    'F' : { "single": 10, "free": (2, 'F', 1) } 
+    'F' : { "single": 10, "free": (2, 'F', 1) },
+    'G' : { "single": 20 }, 
+    'H' : { "single": 10, "multiple": [(10, 80), (5, 45)] }, 
+    'I' : { "single": 35 }, 
+    'J' : { "single": 60 }, 
+    'K' : { "single": 80, "multiple": [(2, 150)] }, 
+    'L' : { "single": 90 }, 
+    'M' : { "single": 15 }, 
+    'N' : { "single": 40, "free": (3, 'M', 1) }, 
+    'O' : { "single": 10 }, 
+    'P' : { "single": 50, "multiple": [(5, 200)] }, 
+    'Q' : { "single": 30, "multiple": [(3, 80)] }, 
+    'R' : { "single": 50, "free": (3, 'Q', 1) }, 
+    'S' : { "single": 30 }, 
+    'T' : { "single": 20 }, 
+    'U' : { "single": 40, "free": (3, 'U', 1) }, 
+    'V' : { "single": 50, "multiple": [(3, 130), (2, 90)] }, 
+    'W' : { "single": 20 }, 
+    'X' : { "single": 90 }, 
+    'Y' : { "single": 10 }, 
+    'Z' : { "single": 50 } 
 }
 
 # Function calculating the cost for one letter 
@@ -125,4 +145,5 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
