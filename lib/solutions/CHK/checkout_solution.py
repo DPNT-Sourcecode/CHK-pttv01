@@ -66,7 +66,7 @@ def process_any(basket):
     idx_price = 0
     idx_item = 0
     counter = 0
-    while counter < num_of_items:
+    while counter < num_of_groups * any_of_them['number']:
        if basket[sorted_dict_of_items[sorted_elems[idx_price]][idx_item]] == 0:
            idx_item += 1
            if idx_item >= len(sorted_dict_of_items[sorted_elems[idx_price]]):
@@ -196,6 +196,7 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
 
 
