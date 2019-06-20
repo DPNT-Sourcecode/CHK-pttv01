@@ -66,12 +66,13 @@ def process_any(basket):
     idx_price = 0
     idx_item = 0
     for idx in range(num_of_items):
-       if basket[sorted_dict_of_items[idx_price][idx_item]]:
-           print(basket[sorted_dict_of_items[idx_price][idx_item]])
-           basket[sorted_dict_of_items[idx_price][idx_item]] -= 1
+       print("Idx = {}".format(idx))
+       print(sorted_dict_of_items[sorted_elems[idx_price]][idx_item])
+       if basket[sorted_dict_of_items[sorted_elems[idx_price]][idx_item]]:
+           basket[sorted_dict_of_items[sorted_elems[idx_price]][idx_item]] -= 1
        else:
            idx_item += 1
-           if idx_item >= len(sorted_dict_of_items[idx_price]):
+           if idx_item >= len(sorted_dict_of_items[sorted_elems[idx_price]]):
                idx_price += 1
                idx_item = 0
         
@@ -197,6 +198,7 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
 
 
