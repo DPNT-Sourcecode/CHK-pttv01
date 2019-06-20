@@ -55,7 +55,8 @@ def process_any(basket):
             lst_of_items.append(any_item)
             sorted_dict_of_items[inventory[any_item]['single']] = lst_of_items
         num_of_items += basket[any_item]
-    num_of_groups = num_of_items % any_of_them['number']
+    num_of_groups = num_of_items // any_of_them['number']
+
     if not num_of_groups:
         return 0;
     
@@ -66,6 +67,7 @@ def process_any(basket):
     idx_item = 0
     for idx in range(num_of_items):
        if basket[sorted_dict_of_items[idx_price][idx_item]]:
+           print(basket[sorted_dict_of_items[idx_price][idx_item]])
            basket[sorted_dict_of_items[idx_price][idx_item]] -= 1
        else:
            idx_item += 1
@@ -195,6 +197,7 @@ if __name__ == "__main__":
 #    res = checkout(my_string)
 #    print("Test for {} :: {}".format(my_string, str(res)))
         
+
 
 
 
