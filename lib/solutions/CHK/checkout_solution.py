@@ -7,7 +7,7 @@ inventory = {
     'B' : { "single": 30, "multiple": (2, 45) }, 
     'C' : { "single": 20 }, 
     'D' : { "single": 15 }, 
-    'E' : { "single": 40, "free": {2, 'B', 1} } 
+    'E' : { "single": 40, "free": (2, 'B', 1) } 
 }
 
 # Function calculating the cost for one letter 
@@ -56,10 +56,13 @@ def checkout(skus):
         cost += calc_cost(key, value)
 
         # Here we process the free items.
-#        if 'free' in inventory[key]:
-#            num_free = (value // inventory[key]['free'][0]) * inventory[key]['free'][2]
-#            if basket[inventory[key]['free'][1]] >= num_free:
-#                cost -= num_free * inventory[key] 
+        if 'free' in inventory[key]:
+            num_free = (value // inventory[key]['free'][0]) * inventory[key]['free'][2]
+            print("{} has free {}".format(key, str(num_free)))
+            if basket[inventory[key]['free'][1]] >= num_free:
+                cost -= calc_cost(key, num_free)
+            else:
+                cost -= calc_cost(key, basket[key])  
 
     return cost;
 
@@ -83,6 +86,13 @@ if __name__ == "__main__":
         print("Good values failed : {}.".format(str(res)))
     else:
         print("Good values checked : {}.".format(str(res)))
+    my_string = "AAADDBBE";
+    res = checkout(my_string)
+    if res == -1:
+        print("Good values failed : {}.".format(str(res)))
+    else:
+        print("Good values checked : {}.".format(str(res)))
         
+
 
 
